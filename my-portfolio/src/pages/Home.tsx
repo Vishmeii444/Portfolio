@@ -1,18 +1,13 @@
-import React, { useRef } from "react";
+import React from "react";
 import Grainient from "../components/bits/Grainient";
-import VariableProximity from "../components/bits/VariableProximity.tsx";
+import DecryptedText from "../components/bits/DecryptedText";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Home = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div
-      className="relative w-full h-screen overflow-hidden"
-      ref={containerRef}
-    >
-      {/* 1. Background */}
+    <div className="relative w-full h-screen overflow-hidden">
+      {/* 1. Background Layer */}
       <Grainient
         color1="#1E3226"
         color2="#76290B"
@@ -21,48 +16,49 @@ const Home = () => {
         grainAmount={0.05}
       />
 
-      {/* 2. Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4">
-        {/* React Bits Variable Proximity Component */}
-        <div className="mb-4 cursor-default">
-          <VariableProximity
-            label="Hello there, I'm Vishmi"
-            className="variable-proximity-demo"
-            fromFontVariationSettings="'wght' 400, 'opsz' 9"
-            toFontVariationSettings="'wght' 1000, 'opsz' 40"
-            containerRef={containerRef}
-            radius={200}
-            falloff="gaussian"
-            style={{
-              color: "#fbedc3",
-              fontSize: "clamp(3rem, 12vw, 8rem)",
-              lineHeight: "1",
-              fontFamily: "'Roboto Flex', sans-serif",
-            }}
+      {/* 2. Content Layer */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4 text-center">
+        {/* Decrypted Name Section */}
+        <div className="mb-2">
+          <DecryptedText
+            text="Hello there, I'm Vishmi"
+            animateOn="view"
+            revealDirection="center"
+            speed={40}
+            sequential={true}
+            className="revealed-char"
+            encryptedClassName="encrypted-char"
+            parentClassName="font-['Outfit'] font-black text-[clamp(3rem,12vw,8rem)] leading-tight tracking-tighter"
           />
         </div>
 
-        {/* Subtext */}
+        {/* Subtext with a simple fade */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="font-mono text-[15px] tracking-[0.6em] uppercase text-white/30 mb-12"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="font-['Outfit'] font-light text-[10px] tracking-[0.8em] uppercase text-white/40 mb-12"
         >
-          Aspiring Frontend Developer
+          Creative Developer & Designer
         </motion.p>
 
-        {/* Liquid Glass Social Icons */}
-        <div className="flex gap-6">
+        {/* Contact Icons */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2 }}
+          className="flex gap-6"
+        >
           <ContactIcon href="#" icon={<Github size={20} />} />
           <ContactIcon href="#" icon={<Linkedin size={20} />} />
           <ContactIcon href="#" icon={<Mail size={20} />} />
-        </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
+// Liquid Glass Icon Component
 const ContactIcon = ({
   href,
   icon,

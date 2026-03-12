@@ -2,18 +2,19 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+/* Style for the letters while they are still scrambled */
+.encrypted-char {
+  color: #CCB363; /* Gold */
+  opacity: 0.7;
+  filter: blur(1px);
+}
+
+/* Style for the letters once they reveal */
+.revealed-char {
+  color: #fbedc3; /* Cream */
+  transition: all 0.3s ease;
 }
 
 body {
