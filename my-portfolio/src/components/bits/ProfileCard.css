@@ -11,12 +11,13 @@
   --background-y: 50%;
   --grain: none;
   --icon: none;
-  --behind-glow-color: rgba(204, 179, 99, 0.15);
+  --behind-glow-color: rgba(204, 179, 99, 0.15); /* Warm Gold Glow */
   --behind-glow-size: 30%;
   --inner-gradient: none;
   --card-radius: 24px;
 }
 
+/* Wrapper to handle 3D perspective */
 .pc-card-wrapper {
   perspective: 1000px;
   transform: translate3d(0, 0, 0.1px);
@@ -24,7 +25,7 @@
   touch-action: none;
 }
 
-/* Subtle outer glow behind the card */
+/* The glow that follows the mouse behind the card */
 .pc-behind {
   position: absolute;
   inset: -20px;
@@ -45,6 +46,7 @@
   --card-opacity: 1;
 }
 
+/* Main Card Container */
 .pc-card {
   height: 80svh;
   max-height: 540px;
@@ -71,11 +73,11 @@
   inset: 0;
   position: absolute;
   background-image: var(--inner-gradient);
-  background-color: rgba(13, 20, 16, 0.9);
+  background-color: rgba(13, 20, 16, 0.9); 
   transform: none;
 }
 
-/* Static, clean light flare instead of rainbow */
+/* Static, clean light flare (Replaces the rainbow holo) */
 .pc-shine {
   background: radial-gradient(
     circle at var(--pointer-x) var(--pointer-y),
@@ -87,11 +89,11 @@
   mix-blend-mode: plus-Lighter;
 }
 
-/* Disable holographic layers */
+/* Ensure holo layers are disabled */
 .pc-shine::before,
 .pc-shine::after {
   content: "";
-  display: none;
+  display: none; 
 }
 
 /* Subtle glass reflection overlay */
@@ -107,8 +109,9 @@
   z-index: 4;
 }
 
+/* Avatar/Character layer */
 .pc-avatar-content {
-  mix-blend-mode: normal; /* Restore photo colors */
+  mix-blend-mode: normal; 
   overflow: visible;
   transform: translateZ(10px);
 }
@@ -119,10 +122,11 @@
   left: 50%;
   bottom: -2px;
   transform: translateX(-50%);
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.8));
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.8));
   will-change: transform;
 }
 
+/* Glass UI Panel at the bottom */
 .pc-user-info {
   position: absolute;
   bottom: 20px;
@@ -152,7 +156,7 @@
 
 .pc-status {
   font-size: 11px;
-  color: #ccb363; /* Your brand Gold */
+  color: #CCB363; /* Brand Gold */
   opacity: 0.9;
 }
 
@@ -170,9 +174,10 @@
 
 .pc-contact-btn:hover {
   background: rgba(204, 179, 99, 0.15);
-  border-color: #ccb363;
+  border-color: #CCB363;
 }
 
+/* Header Text inside the card */
 .pc-details {
   width: 100%;
   position: absolute;
@@ -192,7 +197,7 @@
 }
 
 .pc-details p {
-  color: #ccb363;
+  color: #CCB363;
   font-size: 15px;
   font-weight: 500;
   margin-top: 4px;
@@ -200,10 +205,13 @@
 
 /* Animations disabled for cleaner look */
 @keyframes glow-bg {
-  display: none;
+  from { opacity: 1; }
+  to { opacity: 1; }
 }
+
 @keyframes holo-bg {
-  display: none;
+  from { background-position: 0% 0%; }
+  to { background-position: 0% 0%; }
 }
 
 @media (max-width: 768px) {
@@ -213,5 +221,11 @@
   }
   .pc-details h3 {
     font-size: 1.8rem;
+  }
+  .pc-user-info {
+    padding: 10px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
   }
 }
