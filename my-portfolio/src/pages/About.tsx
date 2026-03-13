@@ -3,23 +3,29 @@ import SpotlightCard from "../components/bits/SpotlightCard";
 import { motion } from "framer-motion";
 
 const About = () => {
-  const skills = [
-    "React",
-    "TypeScript",
-    "Node.js",
-    "Python",
-    "Framer Motion",
-    "Tailwind CSS",
-    "MongoDB",
+  const skills = ["React", "TypeScript", "Node.js", "Java", "Tailwind CSS", "MongoDB", "Python"];
+
+  const hobbies = [
+    { name: "Reading", icon: "📚" },
+    { name: "Listening to Songs", icon: "🎧" },
+    { name: "Pinteresting", icon: "📌" },
+    { name: "Napping", icon: "😴" },
+  ];
+
+  const volunteering = [
+    { name: "Toastmasters International", role: "Secretary / Member" },
+    { name: "Mozilla Campus Club", role: "Volunteer" },
+    { name: "IEEE Student Branch", role: "Member" },
   ];
 
   return (
     <div className="min-h-screen bg-[#1E3226] pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
         {/* LEFT COLUMN: THE PROFILE CARD */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }} // Animates when it comes into view
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="lg:col-span-4 flex justify-center lg:block"
@@ -31,7 +37,7 @@ const About = () => {
               handle="Vishmeii444"
               status="Open to Work"
               contactText="Get in Touch"
-              avatarUrl="/your-photo.png" // Best with transparent background
+              avatarUrl="/your-photo.png"
               showUserInfo={true}
               enableTilt={true}
               behindGlowEnabled={true}
@@ -42,52 +48,68 @@ const About = () => {
         </motion.div>
 
         {/* RIGHT COLUMN: CONTENT */}
-        <div className="lg:col-span-8 flex flex-col gap-8">
+        <div className="lg:col-span-8 flex flex-col gap-10">
+          
           {/* EDUCATION SECTION */}
           <section>
-            <h2 className="text-[#CCB363] font-mono text-xs tracking-[0.5em] uppercase mb-6">
-              Education
-            </h2>
-            <div className="grid grid-cols-1 gap-6">
-              <SpotlightCard>
-                <h3 className="text-white font-bold text-xl mb-2 italic font-['Outfit']">
-                  Bachelor of Science in Computer Science
-                </h3>
-                <p className="text-[#fbedc3]/80 text-base leading-relaxed">
-                  Informatics Institute of Technology
-                  <span className="block text-sm text-[#CCB363] mt-1 opacity-80">
-                    Affiliated with the University of Westminster • 2024 -
-                    Current
-                  </span>
-                </p>
-              </SpotlightCard>
-            </div>
-          </section>
-
-          {/* TECH STACK SECTION */}
-          <section>
-            <h2 className="text-[#CCB363] font-mono text-xs tracking-[0.5em] uppercase mb-6">
-              Tech Stack
-            </h2>
+            <h2 className="text-[#CCB363] font-mono text-xs tracking-[0.5em] uppercase mb-6">Education</h2>
             <SpotlightCard>
-              <div className="flex flex-wrap gap-3">
-                {skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#fbedc3] text-sm font-medium transition-all hover:border-[#CCB363]/50 hover:bg-[#CCB363]/5"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-              <p className="mt-6 text-[#fbedc3]/50 text-xs italic font-mono">
-                // Constantly evolving and exploring new frameworks
+              <h3 className="text-white font-bold text-xl mb-2 italic font-['Outfit']">
+                Bachelor of Science in Computer Science
+              </h3>
+              <p className="text-[#fbedc3]/80 text-base">
+                Informatics Institute of Technology
+                <span className="block text-sm text-[#CCB363] mt-1 opacity-80">
+                  Affiliated with the University of Westminster • 2024 - Current
+                </span>
               </p>
             </SpotlightCard>
           </section>
 
-          {/* HOBBIES AND FUN STUFF*/}
-          
+          {/* TECH STACK SECTION */}
+          <section>
+            <h2 className="text-[#CCB363] font-mono text-xs tracking-[0.5em] uppercase mb-6">Tech Stack</h2>
+            <SpotlightCard>
+              <div className="flex flex-wrap gap-3">
+                {skills.map((skill) => (
+                  <span key={skill} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#fbedc3] text-sm font-medium transition-all hover:border-[#CCB363]/50 hover:bg-[#CCB363]/5">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </SpotlightCard>
+          </section>
+
+          {/* VOLUNTEERING SECTION */}
+          <section>
+            <h2 className="text-[#CCB363] font-mono text-xs tracking-[0.5em] uppercase mb-6">Volunteering & Leadership</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {volunteering.map((item) => (
+                <SpotlightCard key={item.name}>
+                  <div className="py-2">
+                    <h4 className="text-white font-semibold text-lg leading-tight">{item.name}</h4>
+                    <p className="text-[#CCB363] text-xs mt-2 font-mono uppercase tracking-wider">{item.role}</p>
+                  </div>
+                </SpotlightCard>
+              ))}
+            </div>
+          </section>
+
+          {/* HOBBIES SECTION */}
+          <section>
+            <h2 className="text-[#CCB363] font-mono text-xs tracking-[0.5em] uppercase mb-6">Beyond the Code</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {hobbies.map((hobby) => (
+                <SpotlightCard key={hobby.name}>
+                  <div className="flex flex-col items-center justify-center py-4 gap-2">
+                    <span className="text-2xl">{hobby.icon}</span>
+                    <span className="text-[#fbedc3] text-sm font-medium">{hobby.name}</span>
+                  </div>
+                </SpotlightCard>
+              ))}
+            </div>
+          </section>
+
         </div>
       </div>
     </div>
