@@ -40,7 +40,7 @@ const Projects = () => {
         animate={{ opacity: 1, x: 0 }}
         className="text-4xl md:text-5xl font-black text-[#CCB363] uppercase tracking-tighter"
       >
-        Projects
+        Projects.
       </motion.h1>
       
       <div className="h-[2px] w-12 bg-[#CCB363] mt-2 ml-0" />

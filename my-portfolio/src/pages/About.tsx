@@ -36,7 +36,7 @@ const About = () => {
             animate={{ opacity: 1, x: 0 }}
             className="text-4xl md:text-5xl font-black text-[#CCB363] uppercase tracking-tighter"
           >
-            About
+            About.
           </motion.h1>
           <div className="h-1 w-12 bg-[#CCB363] mt-2" />
         </header>
