@@ -5,20 +5,29 @@ const Projects = () => {
   const projectData = [
     {
       title: "Personal Portfolio",
-      description: "Built using react bits",
-      tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      description:
+        "Portfolio implemented focusing on motion design, consistent colours and seamless user experience.",
+      tech: ["React", "TypeScript", "CSS"],
       link: "#",
     },
     {
-      title: "Cookimate - Software Development Group Project",
+      title: "Cookimate",
       description:
         "Currently developing and implementing an application to manage food wastage and to help amateur cooks with cooking.",
-      tech: ["MongoDB", "Express.js", "React Native", "Node.js", "CSS" , "Firebase"],
+      tech: [
+        "MongoDB",
+        "Express.js",
+        "React Native",
+        "Node.js",
+        "CSS",
+        "Firebase",
+      ],
       link: "https://github.com/MthukaFernando/CookiMate-project-implementation",
     },
     {
       title: "BookFour",
-      description: "A book store website where users can add, update, and delete books.",
+      description:
+        "A book store website where users can add, update, and delete books.",
       tech: ["React", "MongoDB", "Node.js", "Express.js"],
       link: "https://product-store-web-application-kzbyp92h0-vishmeii444s-projects.vercel.app/",
     },
@@ -33,11 +42,7 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-[#1E3226] pt-32 pb-20 px-4 md:px-8">
-      {" "}
-      {/* Reduced horizontal padding */}
       <div className="max-w-7xl mx-auto">
-        {" "}
-        {/* Keep consistent max-width */}
         {/* LEFT-ALIGNED HEADER */}
         <header className="mb-12 text-left">
           <motion.h1
@@ -59,8 +64,9 @@ const Projects = () => {
             // Digital Portfolio 2026
           </motion.p>
         </header>
-        {/* PROJECTS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+        {/* PROJECTS GRID - Using items-stretch forequal height */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
           {projectData.map((project, index) => (
             <motion.div
               key={index}
@@ -68,9 +74,10 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
+              className="flex"
             >
-              <SpotlightCard>
-                <div className="p-8 h-full flex flex-col justify-between min-h-[300px]">
+              <SpotlightCard className="h-full w-full">
+                <div className="p-8 h-full flex flex-col justify-between min-h-[350px]">
                   <div>
                     <h3 className="text-white font-bold text-2xl mb-4 italic font-['Outfit']">
                       {project.title}
@@ -79,6 +86,7 @@ const Projects = () => {
                       {project.description}
                     </p>
                   </div>
+
                   <div>
                     <div className="flex flex-wrap gap-3 mb-8">
                       {project.tech.map((tag) => (
@@ -92,6 +100,8 @@ const Projects = () => {
                     </div>
                     <a
                       href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="group inline-flex items-center gap-2 text-white font-bold text-xs uppercase tracking-[0.2em] hover:text-[#CCB363] transition-all"
                     >
                       View Project{" "}
