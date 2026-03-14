@@ -13,14 +13,14 @@ const Projects = () => {
       title: "Cookimate - Software Development Group Project",
       description:
         "Currently developing and implementing an application to manage food wastage and to help amateur cooks with cooking.",
-      tech: ["MongoDB", "Express.js", "React.js", "Node.js", "CSS" , "Firebase"],
+      tech: ["MongoDB", "Express.js", "React Native", "Node.js", "CSS" , "Firebase"],
       link: "https://github.com/MthukaFernando/CookiMate-project-implementation",
     },
     {
       title: "BookFour",
-      description: "A book store website",
-      tech: ["React Native", "Firebase", "Node.js"],
-      link: "#",
+      description: "A book store website where users can add, update, and delete books.",
+      tech: ["React", "MongoDB", "Node.js", "Express.js"],
+      link: "https://product-store-web-application-kzbyp92h0-vishmeii444s-projects.vercel.app/",
     },
     {
       title: "CabinThree ",
