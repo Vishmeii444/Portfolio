@@ -22,39 +22,42 @@ const Projects = () => {
       link: "#",
     },
     {
-      title: "Estate Management Application",
-      description: "Advanced Client-Side Development Coursework",
-      tech: ["Node.js", "Express", "MongoDB"],
-      link: "#",
+      title: "CabinThree ",
+      description:
+        "An estate agent application used to handle properties with functionalities such as liking and unliking properties as well as filtering out property options.",
+      tech: ["React", "HTML", "CSS"],
+      link: "https://cabinthree.netlify.app/",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-[#1E3226] pt-32 pb-20 px-4 md:px-8"> {/* Reduced horizontal padding */}
-  <div className="max-w-7xl mx-auto"> {/* Keep consistent max-width */}
-    
-    {/* LEFT-ALIGNED HEADER */}
-    <header className="mb-12 text-left">
-      <motion.h1 
-        initial={{ opacity: 0, x: -30 }}
-        animate={{ opacity: 1, x: 0 }}
-        className="text-4xl md:text-5xl font-black text-[#CCB363] uppercase tracking-tighter"
-      >
-        Projects.
-      </motion.h1>
-      
-      <div className="h-[2px] w-12 bg-[#CCB363] mt-2 ml-0" />
-      
-      <motion.p 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="text-[#fbedc3]/50 font-mono mt-4 text-[10px] tracking-[0.3em] uppercase block"
-      >
-        // Digital Portfolio 2026
-      </motion.p>
-    </header>
+    <div className="min-h-screen bg-[#1E3226] pt-32 pb-20 px-4 md:px-8">
+      {" "}
+      {/* Reduced horizontal padding */}
+      <div className="max-w-7xl mx-auto">
+        {" "}
+        {/* Keep consistent max-width */}
+        {/* LEFT-ALIGNED HEADER */}
+        <header className="mb-12 text-left">
+          <motion.h1
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="text-4xl md:text-5xl font-black text-[#CCB363] uppercase tracking-tighter"
+          >
+            Projects.
+          </motion.h1>
 
+          <div className="h-[2px] w-12 bg-[#CCB363] mt-2 ml-0" />
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-[#fbedc3]/50 font-mono mt-4 text-[10px] tracking-[0.3em] uppercase block"
+          >
+            // Digital Portfolio 2026
+          </motion.p>
+        </header>
         {/* PROJECTS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {projectData.map((project, index) => (
