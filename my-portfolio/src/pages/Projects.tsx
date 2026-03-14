@@ -10,10 +10,11 @@ const Projects = () => {
       link: "#",
     },
     {
-      title: "Cookimate",
-      description: "SDGP Project",
+      title: "Cookimate - Software Development Group Project",
+      description:
+        "Currently developing and implementing an application to manage food wastage and to help amateur cooks with cooking.",
       tech: ["Next.js", "Firebase", "Tailwind CSS"],
-      link: "#",
+      link: "https://github.com/MthukaFernando/CookiMate-project-implementation",
     },
     {
       title: "BookFour",
