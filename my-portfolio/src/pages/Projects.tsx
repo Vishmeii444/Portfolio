@@ -6,14 +6,14 @@ const Projects = () => {
     {
       title: "Personal Portfolio",
       description: "Built using react bits",
-      tech: ["React", "TypeScript", "Tailwind", "Framer Motion"],
+      tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
       link: "#",
     },
     {
       title: "Cookimate - Software Development Group Project",
       description:
         "Currently developing and implementing an application to manage food wastage and to help amateur cooks with cooking.",
-      tech: ["Next.js", "Firebase", "Tailwind CSS"],
+      tech: ["MongoDB", "Express.js", "React.js", "Node.js", "CSS" , "Firebase"],
       link: "https://github.com/MthukaFernando/CookiMate-project-implementation",
     },
     {
