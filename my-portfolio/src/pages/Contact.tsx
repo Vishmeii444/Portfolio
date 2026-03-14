@@ -40,7 +40,7 @@ const Contact = () => {
                   Email
                 </p>
                 <p className="text-white text-xl font-medium group-hover:text-[#CCB363] transition-colors">
-                  vishmeii444
+                  vishmihimashag@gmail.com
                 </p>
               </div>
 
@@ -49,7 +49,7 @@ const Contact = () => {
                   Socials
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  {["LinkedIn", "GitHub", "Pinterest"].map((link) => (
+                  {["LinkedIn", "GitHub"].map((link) => (
                     <a
                       key={link}
                       href="#"
