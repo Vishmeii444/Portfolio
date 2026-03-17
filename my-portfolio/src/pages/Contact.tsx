@@ -1,10 +1,21 @@
 import { motion } from "framer-motion";
 
 const Contact = () => {
+  const socials = [
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/vishmi-gangodawila/",
+    },
+    { 
+      name: "GitHub", 
+      url: "https://github.com/Vishmeii444" 
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-[#1E3226] pt-32 pb-20 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* HEADER - Kept aligned with your other pages */}
+        {/* HEADER */}
         <header className="mb-16">
           <motion.h1
             initial={{ opacity: 0, x: -30 }}
@@ -35,27 +46,34 @@ const Contact = () => {
             </motion.div>
 
             <div className="flex flex-col gap-6">
+              {/* EMAIL SECTION*/}
               <div className="group cursor-pointer">
                 <p className="text-[#CCB363] font-mono text-[10px] uppercase tracking-[0.3em] mb-1">
                   Email
                 </p>
-                <p className="text-white text-xl font-medium group-hover:text-[#CCB363] transition-colors">
+                <a
+                  href="mailto:vishmihgangodawila@gmail.com"
+                  className="text-white text-xl font-medium group-hover:text-[#CCB363] transition-colors block"
+                >
                   vishmihgangodawila@gmail.com
-                </p>
+                </a>
               </div>
 
+              {/* SOCIALS SECTION */}
               <div>
                 <p className="text-[#CCB363] font-mono text-[10px] uppercase tracking-[0.3em] mb-3">
                   Socials
                 </p>
-                <div className="flex flex-wrap gap-3">
-                  {["LinkedIn", "GitHub"].map((link) => (
+                <div className="flex flex-wrap gap-6">
+                  {socials.map((link) => (
                     <a
-                      key={link}
-                      href="#"
+                      key={link.name}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-[#fbedc3] border-b border-[#CCB363]/30 pb-1 hover:border-[#CCB363] hover:text-[#CCB363] transition-all text-sm font-medium"
                     >
-                      {link}
+                      {link.name}
                     </a>
                   ))}
                 </div>
@@ -63,18 +81,17 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* FORM SIDE - Glassmorphic Card instead of Spotlight */}
+          {/* FORM SIDE */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             className="lg:col-span-7 relative group"
           >
-            {/* Subtle Glow behind the card */}
             <div className="absolute -inset-0.5 bg-gradient-to-r from-[#CCB363]/20 to-[#1E3226] rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
 
             <div className="relative bg-[#16261d] border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl backdrop-blur-sm">
-              <form className="flex flex-col gap-6">
+              <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <input
                     type="text"
@@ -96,6 +113,7 @@ const Contact = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  type="submit"
                   className="mt-4 bg-[#CCB363] py-4 text-[#1E3226] font-bold uppercase tracking-[0.4em] text-[10px] transition-all hover:bg-[#fbedc3]"
                 >
                   Send Inquiry
