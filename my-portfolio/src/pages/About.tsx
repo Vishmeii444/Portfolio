@@ -26,14 +26,9 @@ const About = () => {
     { name: "IEEE Student Branch", role: "Member" },
   ];
 
-  const handleContact = () => {
-    window.location.href = "mailto:your-email@example.com";
-  };
-
   return (
-    <div className="min-h-screen bg-[#1E3226] pt-32 pb-20 px-6 overflow-x-hidden">
+    <div className="min-h-screen bg-[#1E3226] pt-32 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* HEADER SECTION */}
         <header className="mb-12">
           <motion.h1
             initial={{ opacity: 0, x: -20 }}
@@ -46,7 +41,6 @@ const About = () => {
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          
           {/* LEFT COLUMN: THE PROFILE CARD */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -55,59 +49,53 @@ const About = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:col-span-4 flex justify-center lg:block"
           >
-            <div className="sticky top-32 w-full max-w-[350px]">
+            <div className="sticky top-32">
               <ProfileCard
                 name="Vishmi"
                 title="Frontend Developer"
                 handle="Vishmeii444"
                 status="Open to Work"
                 contactText="Get in Touch"
-                // Ensure image is in public/images/vishmi.jpeg
                 avatarUrl="/images/vishmi.jpeg"
                 showUserInfo={true}
                 enableTilt={true}
                 behindGlowEnabled={true}
-                behindGlowColor="rgba(204, 179, 99, 0.25)"
-                innerGradient="linear-gradient(to bottom, rgba(255,255,255,0.03), rgba(0,0,0,0.4))"
-                onContactClick={handleContact}
+                behindGlowColor="rgba(204, 179, 99, 0.2)"
+                innerGradient="linear-gradient(to bottom, rgba(255,255,255,0.02), rgba(0,0,0,0))"
               />
             </div>
           </motion.div>
 
-          {/* RIGHT COLUMN: CONTENT SECTIONS */}
+          {/* RIGHT COLUMN: CONTENT */}
           <div className="lg:col-span-8 flex flex-col gap-10">
-            
-            {/* EDUCATION */}
             <section>
               <h2 className="text-[#CCB363] font-mono text-xs tracking-[0.5em] uppercase mb-6">
                 Education
               </h2>
               <SpotlightCard>
-                <div className="p-2">
-                  <h3 className="text-white font-bold text-xl mb-2 italic font-['Outfit']">
-                    Bachelor of Science in Computer Science
-                  </h3>
-                  <p className="text-[#fbedc3]/80 text-base">
-                    Informatics Institute of Technology
-                    <span className="block text-sm text-[#CCB363] mt-1 opacity-80">
-                      Affiliated with the University of Westminster • 2024 - Present
-                    </span>
-                  </p>
-                </div>
+                <h3 className="text-white font-bold text-xl mb-2 italic font-['Outfit']">
+                  Bachelor of Science in Computer Science
+                </h3>
+                <p className="text-[#fbedc3]/80 text-base">
+                  Informatics Institute of Technology
+                  <span className="block text-sm text-[#CCB363] mt-1 opacity-80">
+                    Affiliated with the University of Westminster • 2024 -
+                    Current
+                  </span>
+                </p>
               </SpotlightCard>
             </section>
 
-            {/* TECH STACK */}
             <section>
               <h2 className="text-[#CCB363] font-mono text-xs tracking-[0.5em] uppercase mb-6">
                 Tech Stack
               </h2>
               <SpotlightCard>
-                <div className="flex flex-wrap gap-3 p-2">
+                <div className="flex flex-wrap gap-3">
                   {skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#fbedc3] text-sm font-medium transition-all hover:border-[#CCB363]/50 hover:bg-[#CCB363]/5 hover:scale-105"
+                      className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[#fbedc3] text-sm font-medium transition-all hover:border-[#CCB363]/50 hover:bg-[#CCB363]/5"
                     >
                       {skill}
                     </span>
@@ -116,7 +104,6 @@ const About = () => {
               </SpotlightCard>
             </section>
 
-            {/* VOLUNTEERING */}
             <section>
               <h2 className="text-[#CCB363] font-mono text-xs tracking-[0.5em] uppercase mb-6">
                 Volunteering
@@ -124,7 +111,7 @@ const About = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {volunteering.map((item) => (
                   <SpotlightCard key={item.name}>
-                    <div className="py-2 px-1">
+                    <div className="py-2">
                       <h4 className="text-white font-semibold text-lg leading-tight">
                         {item.name}
                       </h4>
@@ -137,7 +124,6 @@ const About = () => {
               </div>
             </section>
 
-            {/* HOBBIES */}
             <section>
               <h2 className="text-[#CCB363] font-mono text-xs tracking-[0.5em] uppercase mb-6">
                 Hobbies & Fun Stuff
@@ -155,7 +141,6 @@ const About = () => {
                 ))}
               </div>
             </section>
-
           </div>
         </div>
       </div>
