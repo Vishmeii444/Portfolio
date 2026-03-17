@@ -39,15 +39,12 @@ const Footer = () => {
                 <h2 className="font-['Outfit'] font-black text-5xl text-white uppercase tracking-tighter mb-2 leading-none">
                   Vishmi<span className="text-[#CCB363]">.</span>
                 </h2>
-                <p className="text-[#fbedc3]/40 font-mono text-[10px] uppercase tracking-[0.4em]">
-                  Creative Developer & Designer
-                </p>
               </div>
 
               <div className="flex flex-col gap-4">
                 <a href="mailto:vishmeii444@gmail.com" className="flex items-center gap-3 text-white/70 hover:text-[#CCB363] transition-colors group">
                   <Mail size={16} className="text-[#CCB363]" />
-                  <span className="text-sm font-medium">vishmeii444@gmail.com</span>
+                  <span className="text-sm font-medium">vishmihgangodawila@gmail.com</span>
                 </a>
                 <div className="flex items-center gap-3 text-white/70">
                   <MapPin size={16} className="text-[#CCB363]" />
@@ -77,14 +74,12 @@ const Footer = () => {
             <div className="lg:col-span-4 flex flex-col gap-6 lg:items-end">
               <p className="text-[#CCB363] font-mono text-[10px] uppercase tracking-[0.4em] font-bold">Connect</p>
               <div className="flex gap-4">
-                <FooterIcon href="#" icon={<Github size={20} />} />
-                <FooterIcon href="#" icon={<Linkedin size={20} />} />
-                <FooterIcon href="#" icon={<Mail size={20} />} />
+                <FooterIcon href="https://github.com/Vishmeii444" icon={<Github size={20} />} />
+                <FooterIcon href="https://www.linkedin.com/in/vishmi-gangodawila/" icon={<Linkedin size={20} />} />
               </div>
               <div className="mt-8 lg:text-right">
                  <p className="text-white/20 font-mono text-[9px] uppercase tracking-widest leading-relaxed">
                    © {currentYear} Vishmi Himasha <br/>
-                   Crafted with precision & gold
                  </p>
               </div>
             </div>

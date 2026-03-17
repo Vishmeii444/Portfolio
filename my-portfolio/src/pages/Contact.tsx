@@ -40,7 +40,7 @@ const Contact = () => {
                   Email
                 </p>
                 <p className="text-white text-xl font-medium group-hover:text-[#CCB363] transition-colors">
-                  vishmihimashag@gmail.com
+                  vishmihgangodawila@gmail.com
                 </p>
               </div>
 

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Home = () => {
   const [copied, setCopied] = useState(false);
-  const emailAddress = "vishmihimashag@gmail.com";
+  const emailAddress = "vishmihgangodawila@gmail.com";
 
   const handleEmailClick = (e: React.MouseEvent) => {
     // Copy to clipboard
