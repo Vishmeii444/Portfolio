@@ -57,7 +57,7 @@ const About = () => {
                 handle="Vishmeii444"
                 status="Open to Work"
                 contactText="Get in Touch"
-                avatarUrl="/your-photo.png"
+                avatarUrl=""
                 showUserInfo={true}
                 enableTilt={true}
                 behindGlowEnabled={true}
