@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
-import "./ProfileCard.css";
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
+import './ProfileCard.css';
 
 interface ProfileCardProps {
   avatarUrl: string;
@@ -23,49 +23,35 @@ interface ProfileCardProps {
   onContactClick?: () => void;
 }
 
-const DEFAULT_INNER_GRADIENT =
-  "linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)";
+const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
 
 const ANIMATION_CONFIG = {
   INITIAL_DURATION: 1200,
   INITIAL_X_OFFSET: 70,
   INITIAL_Y_OFFSET: 60,
   DEVICE_BETA_OFFSET: 20,
-  ENTER_TRANSITION_MS: 180,
+  ENTER_TRANSITION_MS: 180
 } as const;
 
-const clamp = (v: number, min = 0, max = 100): number =>
-  Math.min(Math.max(v, min), max);
-const round = (v: number, precision = 3): number =>
-  parseFloat(v.toFixed(precision));
-const adjust = (
-  v: number,
-  fMin: number,
-  fMax: number,
-  tMin: number,
-  tMax: number,
-): number => round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin));
+const clamp = (v: number, min = 0, max = 100): number => Math.min(Math.max(v, min), max);
+const round = (v: number, precision = 3): number => parseFloat(v.toFixed(precision));
+const adjust = (v: number, fMin: number, fMax: number, tMin: number, tMax: number): number =>
+  round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin));
 
 const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   avatarUrl, // Removed the placeholder string to allow real URL to pass through
-  iconUrl = "",
-  grainUrl = "",
+  iconUrl = '',
+  grainUrl = '',
   innerGradient,
   behindGlowEnabled = true,
   behindGlowColor,
   behindGlowSize,
-  className = "",
+  className = '',
   enableTilt = true,
   enableMobileTilt = false,
   mobileTiltSensitivity = 5,
-  miniAvatarUrl,
-  name = "Vishmi",
-  title = "Frontend Developer",
-  handle = "Vishmeii444",
-  status = "Open to Work",
-  contactText = "Get in Touch",
-  showUserInfo = true,
-  onContactClick,
+  name = 'Vishmi',
+  title = 'Frontend Developer'
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLDivElement>(null);
@@ -99,19 +85,18 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       const centerY = percentY - 50;
 
       const properties = {
-        "--pointer-x": `${percentX}%`,
-        "--pointer-y": `${percentY}%`,
-        "--background-x": `${adjust(percentX, 0, 100, 35, 65)}%`,
-        "--background-y": `${adjust(percentY, 0, 100, 35, 65)}%`,
-        "--pointer-from-center": `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`,
-        "--pointer-from-top": `${percentY / 100}`,
-        "--pointer-from-left": `${percentX / 100}`,
-        "--rotate-x": `${round(-(centerX / 5))}deg`,
-        "--rotate-y": `${round(centerY / 4)}deg`,
+        '--pointer-x': `${percentX}%`,
+        '--pointer-y': `${percentY}%`,
+        '--background-x': `${adjust(percentX, 0, 100, 35, 65)}%`,
+        '--background-y': `${adjust(percentY, 0, 100, 35, 65)}%`,
+        '--pointer-from-center': `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`,
+        '--pointer-from-top': `${percentY / 100}`,
+        '--pointer-from-left': `${percentX / 100}`,
+        '--rotate-x': `${round(-(centerX / 5))}deg`,
+        '--rotate-y': `${round(centerY / 4)}deg`
       } as Record<string, string>;
 
-      for (const [k, v] of Object.entries(properties))
-        wrap.style.setProperty(k, v);
+      for (const [k, v] of Object.entries(properties)) wrap.style.setProperty(k, v);
     };
 
     const step = (ts: number) => {
@@ -124,58 +109,25 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
       currentX += (targetX - currentX) * k;
       currentY += (targetY - currentY) * k;
       setVarsFromXY(currentX, currentY);
-      const stillFar =
-        Math.abs(targetX - currentX) > 0.05 ||
-        Math.abs(targetY - currentY) > 0.05;
+      const stillFar = Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05;
       if (stillFar || document.hasFocus()) {
         rafId = requestAnimationFrame(step);
       } else {
         running = false;
         lastTs = 0;
-        if (rafId) {
-          cancelAnimationFrame(rafId);
-          rafId = null;
-        }
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
       }
     };
 
-    const start = () => {
-      if (!running) {
-        running = true;
-        lastTs = 0;
-        rafId = requestAnimationFrame(step);
-      }
-    };
+    const start = () => { if (!running) { running = true; lastTs = 0; rafId = requestAnimationFrame(step); } };
 
     return {
-      setImmediate(x: number, y: number) {
-        currentX = x;
-        currentY = y;
-        setVarsFromXY(currentX, currentY);
-      },
-      setTarget(x: number, y: number) {
-        targetX = x;
-        targetY = y;
-        start();
-      },
-      toCenter() {
-        const shell = shellRef.current;
-        if (shell)
-          this.setTarget(shell.clientWidth / 2, shell.clientHeight / 2);
-      },
-      beginInitial(durationMs: number) {
-        initialUntil = performance.now() + durationMs;
-        start();
-      },
-      getCurrent() {
-        return { x: currentX, y: currentY, tx: targetX, ty: targetY };
-      },
-      cancel() {
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = null;
-        running = false;
-        lastTs = 0;
-      },
+      setImmediate(x: number, y: number) { currentX = x; currentY = y; setVarsFromXY(currentX, currentY); },
+      setTarget(x: number, y: number) { targetX = x; targetY = y; start(); },
+      toCenter() { const shell = shellRef.current; if (shell) this.setTarget(shell.clientWidth / 2, shell.clientHeight / 2); },
+      beginInitial(durationMs: number) { initialUntil = performance.now() + durationMs; start(); },
+      getCurrent() { return { x: currentX, y: currentY, tx: targetX, ty: targetY }; },
+      cancel() { if (rafId) cancelAnimationFrame(rafId); rafId = null; running = false; lastTs = 0; }
     };
   }, [enableTilt]);
 
@@ -185,32 +137,23 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     return { x: evt.clientX - rect.left, y: evt.clientY - rect.top };
   };
 
-  const handlePointerMove = useCallback(
-    (event: PointerEvent) => {
-      const shell = shellRef.current;
-      if (shell && tiltEngine) {
-        const { x, y } = getOffsets(event, shell);
-        tiltEngine.setTarget(x, y);
-      }
-    },
-    [tiltEngine],
-  );
-
-  const handlePointerEnter = useCallback(
-    (event: PointerEvent) => {
-      const shell = shellRef.current;
-      if (!shell || !tiltEngine) return;
-      shell.classList.add("active", "entering");
-      if (enterTimerRef.current) window.clearTimeout(enterTimerRef.current);
-      enterTimerRef.current = window.setTimeout(
-        () => shell.classList.remove("entering"),
-        ANIMATION_CONFIG.ENTER_TRANSITION_MS,
-      );
+  const handlePointerMove = useCallback((event: PointerEvent) => {
+    const shell = shellRef.current;
+    if (shell && tiltEngine) {
       const { x, y } = getOffsets(event, shell);
       tiltEngine.setTarget(x, y);
-    },
-    [tiltEngine],
-  );
+    }
+  }, [tiltEngine]);
+
+  const handlePointerEnter = useCallback((event: PointerEvent) => {
+    const shell = shellRef.current;
+    if (!shell || !tiltEngine) return;
+    shell.classList.add('active', 'entering');
+    if (enterTimerRef.current) window.clearTimeout(enterTimerRef.current);
+    enterTimerRef.current = window.setTimeout(() => shell.classList.remove('entering'), ANIMATION_CONFIG.ENTER_TRANSITION_MS);
+    const { x, y } = getOffsets(event, shell);
+    tiltEngine.setTarget(x, y);
+  }, [tiltEngine]);
 
   const handlePointerLeave = useCallback(() => {
     const shell = shellRef.current;
@@ -219,7 +162,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     const checkSettle = () => {
       const { x, y, tx, ty } = tiltEngine.getCurrent();
       if (Math.hypot(tx - x, ty - y) < 0.6) {
-        shell.classList.remove("active");
+        shell.classList.remove('active');
         leaveRafRef.current = null;
       } else {
         leaveRafRef.current = requestAnimationFrame(checkSettle);
@@ -229,29 +172,17 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     leaveRafRef.current = requestAnimationFrame(checkSettle);
   }, [tiltEngine]);
 
-  const handleDeviceOrientation = useCallback(
-    (event: DeviceOrientationEvent) => {
-      const shell = shellRef.current;
-      if (!shell || !tiltEngine) return;
-      const { beta, gamma } = event;
-      if (beta == null || gamma == null) return;
-      const centerX = shell.clientWidth / 2;
-      const centerY = shell.clientHeight / 2;
-      const x = clamp(
-        centerX + gamma * mobileTiltSensitivity,
-        0,
-        shell.clientWidth,
-      );
-      const y = clamp(
-        centerY +
-          (beta - ANIMATION_CONFIG.DEVICE_BETA_OFFSET) * mobileTiltSensitivity,
-        0,
-        shell.clientHeight,
-      );
-      tiltEngine.setTarget(x, y);
-    },
-    [tiltEngine, mobileTiltSensitivity],
-  );
+  const handleDeviceOrientation = useCallback((event: DeviceOrientationEvent) => {
+    const shell = shellRef.current;
+    if (!shell || !tiltEngine) return;
+    const { beta, gamma } = event;
+    if (beta == null || gamma == null) return;
+    const centerX = shell.clientWidth / 2;
+    const centerY = shell.clientHeight / 2;
+    const x = clamp(centerX + gamma * mobileTiltSensitivity, 0, shell.clientWidth);
+    const y = clamp(centerY + (beta - ANIMATION_CONFIG.DEVICE_BETA_OFFSET) * mobileTiltSensitivity, 0, shell.clientHeight);
+    tiltEngine.setTarget(x, y);
+  }, [tiltEngine, mobileTiltSensitivity]);
 
   useEffect(() => {
     if (!enableTilt || !tiltEngine) return;
@@ -263,79 +194,56 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
     const plh = handlePointerLeave as EventListener;
     const doh = handleDeviceOrientation as EventListener;
 
-    shell.addEventListener("pointerenter", peh);
-    shell.addEventListener("pointermove", pmh);
-    shell.addEventListener("pointerleave", plh);
+    shell.addEventListener('pointerenter', peh);
+    shell.addEventListener('pointermove', pmh);
+    shell.addEventListener('pointerleave', plh);
 
     const handleClick = () => {
-      if (!enableMobileTilt || location.protocol !== "https:") return;
+      if (!enableMobileTilt || location.protocol !== 'https:') return;
       const anyMotion = window.DeviceMotionEvent as any;
-      if (anyMotion && typeof anyMotion.requestPermission === "function") {
-        anyMotion
-          .requestPermission()
-          .then((s: string) => {
-            if (s === "granted")
-              window.addEventListener("deviceorientation", doh);
-          })
-          .catch(console.error);
+      if (anyMotion && typeof anyMotion.requestPermission === 'function') {
+        anyMotion.requestPermission().then((s: string) => {
+          if (s === 'granted') window.addEventListener('deviceorientation', doh);
+        }).catch(console.error);
       } else {
-        window.addEventListener("deviceorientation", doh);
+        window.addEventListener('deviceorientation', doh);
       }
     };
-    shell.addEventListener("click", handleClick);
+    shell.addEventListener('click', handleClick);
 
-    tiltEngine.setImmediate(
-      shell.clientWidth - ANIMATION_CONFIG.INITIAL_X_OFFSET,
-      ANIMATION_CONFIG.INITIAL_Y_OFFSET,
-    );
+    tiltEngine.setImmediate(shell.clientWidth - ANIMATION_CONFIG.INITIAL_X_OFFSET, ANIMATION_CONFIG.INITIAL_Y_OFFSET);
     tiltEngine.toCenter();
     tiltEngine.beginInitial(ANIMATION_CONFIG.INITIAL_DURATION);
 
     return () => {
-      shell.removeEventListener("pointerenter", peh);
-      shell.removeEventListener("pointermove", pmh);
-      shell.removeEventListener("pointerleave", plh);
-      shell.removeEventListener("click", handleClick);
-      window.removeEventListener("deviceorientation", doh);
+      shell.removeEventListener('pointerenter', peh);
+      shell.removeEventListener('pointermove', pmh);
+      shell.removeEventListener('pointerleave', plh);
+      shell.removeEventListener('click', handleClick);
+      window.removeEventListener('deviceorientation', doh);
       if (enterTimerRef.current) window.clearTimeout(enterTimerRef.current);
       if (leaveRafRef.current) cancelAnimationFrame(leaveRafRef.current);
       tiltEngine.cancel();
     };
-  }, [
-    enableTilt,
-    enableMobileTilt,
-    tiltEngine,
-    handlePointerMove,
-    handlePointerEnter,
-    handlePointerLeave,
-    handleDeviceOrientation,
-  ]);
+  }, [enableTilt, enableMobileTilt, tiltEngine, handlePointerMove, handlePointerEnter, handlePointerLeave, handleDeviceOrientation]);
 
-  const cardStyle = useMemo(
-    () =>
-      ({
-        "--icon": iconUrl ? `url(${iconUrl})` : "none",
-        "--grain": grainUrl ? `url(${grainUrl})` : "none",
-        "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
-        "--behind-glow-color": behindGlowColor ?? "rgba(204, 179, 99, 0.4)", // Matched your gold theme
-        "--behind-glow-size": behindGlowSize ?? "50%",
-      }) as React.CSSProperties,
-    [iconUrl, grainUrl, innerGradient, behindGlowColor, behindGlowSize],
-  );
+  const cardStyle = useMemo(() => ({
+    '--icon': iconUrl ? `url(${iconUrl})` : 'none',
+    '--grain': grainUrl ? `url(${grainUrl})` : 'none',
+    '--inner-gradient': innerGradient ?? DEFAULT_INNER_GRADIENT,
+    '--behind-glow-color': behindGlowColor ?? 'rgba(204, 179, 99, 0.4)', // Matched your gold theme
+    '--behind-glow-size': behindGlowSize ?? '50%'
+  }) as React.CSSProperties, [iconUrl, grainUrl, innerGradient, behindGlowColor, behindGlowSize]);
 
   return (
-    <div
-      ref={wrapRef}
-      className={`pc-card-wrapper ${className}`.trim()}
-      style={cardStyle}
-    >
+    <div ref={wrapRef} className={`pc-card-wrapper ${className}`.trim()} style={cardStyle}>
       {behindGlowEnabled && <div className="pc-behind" />}
       <div ref={shellRef} className="pc-card-shell">
         <section className="pc-card">
           <div className="pc-inside">
             <div className="pc-shine" />
             <div className="pc-glare" />
-
+            
             {/* MAIN AVATAR SECTION */}
             <div className="pc-content pc-avatar-content">
               <img
@@ -343,46 +251,19 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 src={avatarUrl}
                 alt={`${name} avatar`}
                 loading="eager" // Faster loading for profile image
-                onError={(e) => {
+                onError={e => {
                   const t = e.target as HTMLImageElement;
                   // If image fails, show a stylized initial or placeholder
                   t.src = `https://ui-avatars.com/api/?name=${name}&background=CCB363&color=1E3226`;
                 }}
               />
-
-              {showUserInfo && (
-                <div className="pc-user-info">
-                  <div className="pc-user-details">
-                    <div className="pc-mini-avatar">
-                      <img
-                        src={miniAvatarUrl || avatarUrl}
-                        alt="mini-avatar"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = avatarUrl;
-                        }}
-                      />
-                    </div>
-                    <div className="pc-user-text">
-                      <div className="pc-handle">@{handle}</div>
-                      <div className="pc-status">{status}</div>
-                    </div>
-                  </div>
-                  <button
-                    className="pc-contact-btn"
-                    onClick={onContactClick}
-                    style={{ pointerEvents: "auto" }}
-                    type="button"
-                  >
-                    {contactText}
-                  </button>
-                </div>
-              )}
+              
             </div>
 
             {/* BOTTOM TEXT SECTION */}
             <div className="pc-content">
               <div className="pc-details">
-                <h3 style={{ color: "#CCB363" }}>{name}</h3>
+                <h3 style={{ color: '#CCB363' }}>{name}</h3>
                 <p style={{ opacity: 0.8 }}>{title}</p>
               </div>
             </div>
