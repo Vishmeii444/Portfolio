@@ -8,7 +8,7 @@ const Home = () => {
   const [copied, setCopied] = useState(false);
   const emailAddress = "vishmihgangodawila@gmail.com";
 
-  const handleEmailClick = (e: React.MouseEvent) => {
+  const handleEmailClick = (_e: React.MouseEvent) => {
     // Copy to clipboard
     navigator.clipboard.writeText(emailAddress);
     setCopied(true);
