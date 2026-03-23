@@ -1,6 +1,16 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
+
 
 const Contact = () => {
+
+  // to store form values
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  
   const socials = [
     {
       name: "LinkedIn",
