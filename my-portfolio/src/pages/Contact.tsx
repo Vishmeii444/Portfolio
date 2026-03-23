@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import { useState, useRef } from "react"; // Added useRef
-import emailjs from "@emailjs/browser"; // Import EmailJS
 
 const Contact = () => {
   // We keep the state for UI control, but use useRef for the actual email sending
   const formRef = useRef<HTMLFormElement>(null);
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,41 +15,51 @@ const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const socials = [
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/vishmi-gangodawila/" },
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/vishmi-gangodawila/",
+    },
     { name: "GitHub", url: "https://github.com/Vishmeii444" },
   ];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formRef.current) return;
-
     setIsSubmitting(true);
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        () => {
-          setIsSubmitting(false);
-          setSubmitted(true);
-          setFormData({ name: "", email: "", message: "" });
-          setTimeout(() => setSubmitted(false), 3000);
+    // send the formData state directly as JSON
+    try {
+      const response = await fetch(
+        `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(formData),
         },
-        (error) => {
-          setIsSubmitting(false);
-          alert("Failed to send message. Please check your connection.");
-          console.error("EmailJS Error:", error);
-        }
       );
+
+      if (response.ok) {
+        setIsSubmitting(false);
+        setSubmitted(true);
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      setIsSubmitting(false);
+      alert("There was a problem sending your message.");
+      console.error(error);
+    }
   };
 
   return (
@@ -128,12 +137,16 @@ const Contact = () => {
             <div className="absolute -inset-0.5 bg-gradient-to-r from-[#CCB363]/20 to-[#1E3226] rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
 
             <div className="relative bg-[#16261d] border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl backdrop-blur-sm">
-              <form ref={formRef} className="flex flex-col gap-6" onSubmit={handleSubmit}>
+              <form
+                ref={formRef}
+                className="flex flex-col gap-6"
+                onSubmit={handleSubmit}
+              >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <input
                     required
                     type="text"
-                    name="name" // Matches {{name}} in EmailJS template
+                    name="name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Name"
@@ -142,7 +155,7 @@ const Contact = () => {
                   <input
                     required
                     type="email"
-                    name="email" // Matches {{email}} in EmailJS template
+                    name="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Email"
@@ -151,7 +164,7 @@ const Contact = () => {
                 </div>
                 <textarea
                   required
-                  name="message" // Matches {{message}} in EmailJS template
+                  name="message"
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Your Message"
