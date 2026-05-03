@@ -8,7 +8,7 @@ const Projects = () => {
       description:
         "Portfolio implemented focusing on motion design, consistent colours and seamless user experience.",
       tech: ["React", "TypeScript", "CSS"],
-      link: "#",
+      link: "https://portfolio-theta-ten-3qn9j1nyxr.vercel.app/",
     },
     {
       title: "Cookimate",
