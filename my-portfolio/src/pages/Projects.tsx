@@ -29,7 +29,7 @@ const Projects = () => {
       description:
         "A book store website where users can add, update, and delete books.",
       tech: ["React", "MongoDB", "Node.js", "Express.js"],
-      link: "https://product-store-web-application-1elocpsge-vishmeii444s-projects.vercel.app/",
+      link: "https://bookfour-demo.vercel.app/",
     },
     {
       title: "CabinThree ",
