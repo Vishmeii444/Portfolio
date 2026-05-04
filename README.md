@@ -3,4 +3,4 @@ Designing and implementing a professional portfolio using React and TypeScript, 
 
 Tech Stack: React, TypeScript, React Bits, Tailwind CSS, Framer Motion
 
-Link: https://portfolio-theta-ten-3qn9j1nyxr.vercel.app
+Link: https://vishmis-portfolio.vercel.app/
